@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const scrapper = require('scrapper')
 
-//Routes go here
+router.get('/api/scrape', function(req, res) {
+  if (req.url) {
+    scrapper.getInfo(req.url, function(err, price, img) {
+      if (err) return err;
+      res.json({ price, img })
+    })
+  }
+});
 
 module.exports = router;
-
-
-// Example endpoint
-
-// router.get('/', function(req, res) {
-//   res.sendFile('index.html');
-// });
